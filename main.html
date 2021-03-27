@@ -15,30 +15,46 @@
 			<button type="button" id="addTask">Submit</button>
 		</form>
 	</section>
-	<section id="displayArea">
-	</section>
+	<ul id="displayArea">
+	</ul>
 </div>
 
 <script>
-	//ADD A TASK ON BUTTON CLICK
+	//ADD A TASK 
 	let addTaskBtn = document.getElementById('addTask');
-	let taskName = document.getElementById('newTaskName');
-	addTaskBtn.onclick = function(){
-		//create html formatted string
-		let string = '<div class="todo" onmouseenter="displayCheckBox(this);" onmouseleave="removeCheckBox(this);"><p class="taskName" >'+taskName.value+'</p>';
-		string+= '<img class="deleteTask" onclick="deleteTask(this);" src="delete.png"/></div>';
-		//add to dom
-		document.getElementById('displayArea').innerHTML += string;
+	
+	addTaskBtn.addEventListener('click', addTaskToList)
+	addTaskBtn.addEventListener('keypress', function(){
+		if(event.keyCode === 13){
+			event.preventDefault();
+			addTaskToList();
+		}
+	
+	function addTaskToList(){
+		let taskName = document.getElementById('newTaskName');
+		//create li
+		let nodeLI = document.createElement('LI');
+		nodeLI.class = 'todo';
+		nodeLI.addEventListener('mouseenter', function(){displayCheckBox(this);});
+		nodeLI.addEventListener('mouseleave', function(){removeCheckBox(this);});
+		//create p
+		let nodeP = document.createElement('P');
+		nodeP.className = 'taskName';
+		nodeP.innerText = taskName.value;
+		//create image
+		let nodeIMG = document.createElement('IMG');
+		nodeIMG.src = 'delete.png';
+		nodeIMG.className = 'deleteTask';
+		nodeIMG.addEventListener('click', function(){deleteTask(this);});
+		
+		//insert into page
+		nodeLI.appendChild(nodeP);
+		nodeLI.appendChild(nodeIMG);
+		document.getElementById('displayArea').appendChild(nodeLI);
+		//empty field for task name
 		taskName.value='';
 	}
-	//ADD A TASK ON ENTER KEY
-	taskName.onkeypress = function(e) {
-		if (event.keyCode === 13) {
-			event.preventDefault();
-			addTaskBtn.click();
-		}
-	};
-
+	
 
 	//DELETE A TASK
 	function deleteTask(img){
