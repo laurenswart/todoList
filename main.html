@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Todo list</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div id="container">
+	<h1> My Todo List</h1>
+	<section id="addArea">
+		<form>
+			<input type="text" id="newTaskName">
+			<button type="button" id="addTask">Submit</button>
+		</form>
+	</section>
+	<section id="displayArea">
+	</section>
+</div>
+
+<script>
+	//ADD A TASK ON BUTTON CLICK
+	let addTaskBtn = document.getElementById('addTask');
+	let taskName = document.getElementById('newTaskName');
+	addTaskBtn.onclick = function(){
+		//create html formatted string
+		let string = '<div class="todo" onmouseenter="displayCheckBox(this);" onmouseleave="removeCheckBox(this);"><p class="taskName" >'+taskName.value+'</p>';
+		string+= '<img class="deleteTask" onclick="deleteTask(this);" src="delete.png"/></div>';
+		//add to dom
+		document.getElementById('displayArea').innerHTML += string;
+		taskName.value='';
+	}
+	//ADD A TASK ON ENTER KEY
+	taskName.onkeypress = function(e) {
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			addTaskBtn.click();
+		}
+	};
+
+
+	//DELETE A TASK
+	function deleteTask(img){
+		img.parentNode.remove();
+
+	}
+	
+	// ADD THE CHECKBOX
+	function displayCheckBox(node){
+		let img = document.createElement("IMG");
+		if (node.className == 'todo'){
+			img.src = 'check.png';
+			img.className = 'checkTask';
+			img.onclick = function(){checkedTask(node);};
+		} else if (node.className=='done'){
+			img.src = 'done.png';
+			img.className = 'doneTask';
+			img.onclick = function(){uncheckedTask(node);};
+		}
+		
+		node.insertBefore(img, node.firstChild);       
+	}
+	
+	function checkedTask(node){
+		node.className = 'done';
+		removeCheckBox(node);		
+	}
+	function uncheckedTask(node){
+		node.className = 'todo';
+		removeCheckBox(node);
+	}
+	
+	
+	//REMOVE CHECKBOX
+	function removeCheckBox(node){
+		node.firstChild.remove();       
+		
+	}
+</script>
+</body>
+
+</html>

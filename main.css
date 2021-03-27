@@ -1,0 +1,84 @@
+body{
+	background-color:black;
+}
+#container {
+	margin:auto;
+	width: 800px;
+}
+
+h1{
+	text-align:center;
+	background-color:red;
+	padding:10px;
+}
+
+
+/*ADD AREA*/
+section#addArea{
+	background-color:orange;
+	padding: 20px 0px;
+	text-align:center;
+}
+input[type=text]{
+	width:500px;
+	height: 20px;
+}
+
+
+/*DISPLAY AREA*/
+section#displayArea{
+	
+}
+section#displayArea div{ 
+	height:50px;
+	margin:5px;
+	padding:5px;
+	border-radius:30px;
+
+}
+	
+section#displayArea div:hover{
+	background-color:darkgrey;
+}
+section#displayArea  div p{
+	padding:16px;
+	padding-left:30px;
+	margin:0px 0px 0px 15px;
+	display:inline-block;
+	width:500px;
+	border-radius:25px;
+
+}
+section#displayArea  div.todo p{
+	background-color:lightgrey;
+	text-decoration:none;
+}
+section#displayArea div.done p{
+	background-color:lightgreen;
+	text-decoration:line-through;
+}
+section#displayArea img.deleteTask{
+	float:right;
+	
+	background-color:pink;
+}
+section#displayArea img.deleteTask:hover{
+	background-color:red;
+}
+section, h1{
+	margin:0px;
+}
+section#displayArea img{
+	width:20px;
+	padding:15px;
+	border-radius:25px;
+}
+section#displayArea img.checkTask, section#displayArea img.doneTask{
+	float:left;
+}
+section#displayArea img.checkTask:hover{
+	background-color:lightgrey;
+}
+section#displayArea img.doneTask:hover{
+	background-color:lightgrey;
+}
