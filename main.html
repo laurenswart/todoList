@@ -8,35 +8,39 @@
 
 <body>
 <div id="container">
-	<h1> My Todo List</h1>
+	<h1> MY TODO LIST</h1>
 	<section id="addArea">
-		<form>
-			<input type="text" id="newTaskName">
+		<form method="get" action="">
+			<input type="text" id="newTaskName" placeholder="Add a new task" autocomplete="off">
 			<button type="button" id="addTask">Submit</button>
 		</form>
 	</section>
-	<ul id="displayArea">
+	<ul id="taskList">
 	</ul>
 </div>
 
 <script>
-	//ADD A TASK 
+	//ADD A TASK ON BTN CLICK OR ENTER KEY
 	let addTaskBtn = document.getElementById('addTask');
-	
+	let addTaskInput = document.getElementById('newTaskName');
 	addTaskBtn.addEventListener('click', addTaskToList)
-	addTaskBtn.addEventListener('keypress', function(){
+	addTaskInput.addEventListener('keypress', function(){
 		if(event.keyCode === 13){
 			event.preventDefault();
 			addTaskToList();
 		}
+	});
 	
 	function addTaskToList(){
 		let taskName = document.getElementById('newTaskName');
+		if (taskName.value.length == 0){
+			return;
+		}
 		//create li
 		let nodeLI = document.createElement('LI');
-		nodeLI.class = 'todo';
-		nodeLI.addEventListener('mouseenter', function(){displayCheckBox(this);});
-		nodeLI.addEventListener('mouseleave', function(){removeCheckBox(this);});
+		nodeLI.className = 'todo';
+		nodeLI.addEventListener('mouseenter', displayCheckBox);
+		nodeLI.addEventListener('mouseleave', removeCheckBox);
 		//create p
 		let nodeP = document.createElement('P');
 		nodeP.className = 'taskName';
@@ -45,54 +49,65 @@
 		let nodeIMG = document.createElement('IMG');
 		nodeIMG.src = 'delete.png';
 		nodeIMG.className = 'deleteTask';
-		nodeIMG.addEventListener('click', function(){deleteTask(this);});
+		nodeIMG.addEventListener('click', deleteTask);
 		
 		//insert into page
 		nodeLI.appendChild(nodeP);
 		nodeLI.appendChild(nodeIMG);
-		document.getElementById('displayArea').appendChild(nodeLI);
+		document.getElementById('taskList').appendChild(nodeLI);
 		//empty field for task name
 		taskName.value='';
 	}
 	
 
-	//DELETE A TASK
-	function deleteTask(img){
-		img.parentNode.remove();
-
+	/** deletes the list item to which the delete image belongs
+	  */
+	function deleteTask(){
+		this.parentNode.remove();
 	}
 	
-	// ADD THE CHECKBOX
-	function displayCheckBox(node){
+	/** inserts a checkbox image depending on whether this list item class is 'todo'or 'done'
+	  */
+	function displayCheckBox(){
 		let img = document.createElement("IMG");
-		if (node.className == 'todo'){
+		if (this.className == 'todo'){
 			img.src = 'check.png';
-			img.className = 'checkTask';
-			img.onclick = function(){checkedTask(node);};
-		} else if (node.className=='done'){
+			img.className = 'unchecked';
+			img.onclick = checkedTask;
+		} else if (this.className=='done'){
 			img.src = 'done.png';
-			img.className = 'doneTask';
-			img.onclick = function(){uncheckedTask(node);};
+			img.className = 'checked';
+			img.onclick = uncheckedTask;
 		}
-		
-		node.insertBefore(img, node.firstChild);       
+		this.insertBefore(img, this.firstChild);
 	}
 	
-	function checkedTask(node){
-		node.className = 'done';
-		removeCheckBox(node);		
+
+	/** removes the checkbox img in this list item
+	  */
+	function removeCheckBox(){
+		this.firstChild.remove();
 	}
-	function uncheckedTask(node){
-		node.className = 'todo';
-		removeCheckBox(node);
+	
+	/** changes the class of this list element to 'done' and removes current checkbox
+	  */
+	function checkedTask(){
+		let nodeLI = this.parentNode;
+		nodeLI.className = 'done';
+		nodeLI.firstChild.remove();	
+	}
+	
+	/** changes the class of this list element to 'todo' and removes current checkbox
+	  */
+	function uncheckedTask(){
+		let nodeLI = this.parentNode;
+		nodeLI.className = 'todo';
+		nodeLI.firstChild.remove();
 	}
 	
 	
-	//REMOVE CHECKBOX
-	function removeCheckBox(node){
-		node.firstChild.remove();       
-		
-	}
+	
+	
 </script>
 </body>
 

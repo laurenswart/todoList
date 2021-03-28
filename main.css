@@ -1,5 +1,7 @@
+/*GENERAL DISPLAY*/
 body{
-	background-color:white;
+	background-color:black;
+	font-family:'arial';
 }
 #container {
 	margin:auto;
@@ -7,38 +9,60 @@ body{
 }
 
 h1{
+	color: lightgrey;
 	text-align:center;
-	background-color:red;
 	padding:10px;
 }
 
 /*ADD AREA*/
 section#addArea{
-	background-color:orange;
+	background-color:#588c7e;
 	padding: 20px 0px;
 	text-align:center;
+	border-radius: 40px;
+	vertical-align:middle;
 }
-input[type=text]{
+input[type="text"]{
 	width:500px;
-	height: 20px;
+	height: 40px;
+	border-radius:20px;
+	padding-left:20px;
 }
-
+button{
+	border-radius:20px;
+	height:40px;
+	width:100px;
+	color:black;
+	background-color:lightgrey;
+	text-align:center;
+}
+button, input[type=text]{
+	outline: none;
+	border-style:none;
+}
+button:hover{
+	background-color: lightgreen;
+}
+button:focus, input[type=text]:focus{
+	outline: none;
+}
 
 /*DISPLAY AREA*/
-ul#displayArea{
-	list-style-type:none
+ul#taskList{
+	list-style-type:none;
+	padding: 0px;
 }
-#displayArea li{ 
+#taskList li{ 
 	height:50px;
 	margin:5px;
 	padding:5px;
 	border-radius:30px;
 }
 	
-#displayArea li:hover{
+#taskList li:hover{
 	background-color:darkgrey;
 }
-#displayArea p{
+#taskList p{
 	padding:16px;
 	padding-left:30px;
 	margin:0px 0px 0px 15px;
@@ -47,36 +71,35 @@ ul#displayArea{
 	border-radius:25px;
 
 }
-#displayArea  div.todo p{
+#taskList  li.todo p{
 	background-color:lightgrey;
 	text-decoration:none;
 }
-#displayArea div.done p{
+#taskList li.done p{
 	background-color:lightgreen;
 	text-decoration:line-through;
 }
-#displayArea img.deleteTask{
+#taskList img.deleteTask{
 	float:right;
-	
-	background-color:pink;
+	background-color:#d9645977;
 }
-#displayArea img.deleteTask:hover{
-	background-color:red;
+#taskList img.deleteTask:hover{
+	background-color:#d96459ff;
 }
 section, h1{
 	margin:0px;
 }
-#displayArea img{
+#taskList img{
 	width:20px;
 	padding:15px;
 	border-radius:25px;
 }
-#displayArea img.checkTask, section#displayArea img.doneTask{
+#taskList img.checked, #taskList img.unchecked{
 	float:left;
 }
-#displayArea img.checkTask:hover{
-	background-color:lightgrey;
+#taskList img.unchecked:hover{
+	background-color:#f2e394;
 }
-#displayArea img.doneTask:hover{
-	background-color:lightgrey;
+#taskList img.checked:hover{
+	background-color:#f2e394;
 }
