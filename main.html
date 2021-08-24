@@ -10,7 +10,7 @@
 <div id="container">
 	<h1> MY TODO LIST</h1>
 	<section id="addArea">
-		<form method="get" action="">
+		<form method="get" action="#">
 			<input type="text" id="newTaskName" placeholder="Add a new task" autocomplete="off">
 			<button type="button" id="addTask">Submit</button>
 		</form>
@@ -39,11 +39,10 @@
 		//create li
 		let nodeLI = document.createElement('LI');
 		nodeLI.className = 'todo';
-		nodeLI.addEventListener('mouseenter', displayCheckBox);
-		nodeLI.addEventListener('mouseleave', removeCheckBox);
+		
 		//create p
 		let nodeP = document.createElement('P');
-		nodeP.className = 'taskName';
+		nodeP.addEventListener('click', updateTask);
 		nodeP.innerText = taskName.value;
 		//create image
 		let nodeIMG = document.createElement('IMG');
@@ -66,44 +65,21 @@
 		this.parentNode.remove();
 	}
 	
-	/** inserts a checkbox image depending on whether this list item class is 'todo'or 'done'
-	  */
-	function displayCheckBox(){
-		let img = document.createElement("IMG");
-		if (this.className == 'todo'){
-			img.src = 'check.png';
-			img.className = 'unchecked';
-			img.onclick = checkedTask;
-		} else if (this.className=='done'){
-			img.src = 'done.png';
-			img.className = 'checked';
-			img.onclick = uncheckedTask;
-		}
-		this.insertBefore(img, this.firstChild);
-	}
-	
 
-	/** removes the checkbox img in this list item
+	
+	/** switches the class of this list element between 'done' and 'todo'
 	  */
-	function removeCheckBox(){
-		this.firstChild.remove();
+	function updateTask(){
+		let parentClasses = this.parentNode.classList;		
+		if (parentClasses.contains('todo')){
+			parentClasses.remove('todo');
+			parentClasses.add('done');
+		} else {
+			parentClasses.remove('done');
+			parentClasses.add('todo');
+		}
 	}
 	
-	/** changes the class of this list element to 'done' and removes current checkbox
-	  */
-	function checkedTask(){
-		let nodeLI = this.parentNode;
-		nodeLI.className = 'done';
-		nodeLI.firstChild.remove();	
-	}
-	
-	/** changes the class of this list element to 'todo' and removes current checkbox
-	  */
-	function uncheckedTask(){
-		let nodeLI = this.parentNode;
-		nodeLI.className = 'todo';
-		nodeLI.firstChild.remove();
-	}
 	
 	
 	

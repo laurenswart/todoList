@@ -13,8 +13,10 @@ h1{
 	text-align:center;
 	padding:10px;
 }
-
-/*ADD AREA*/
+section, h1{
+	margin:0px;
+}
+/*ADD TASK AREA*/
 section#addArea{
 	background-color:#588c7e;
 	padding: 20px 0px;
@@ -61,7 +63,12 @@ ul#taskList{
 	
 #taskList li:hover{
 	background-color:darkgrey;
+	padding-left:25px;
 }
+#taskList li.done:hover:before{
+	content:'✔';
+}
+
 #taskList p{
 	padding:16px;
 	padding-left:30px;
@@ -69,37 +76,23 @@ ul#taskList{
 	display:inline-block;
 	width:500px;
 	border-radius:25px;
-
 }
 #taskList  li.todo p{
 	background-color:lightgrey;
-	text-decoration:none;
+	
 }
 #taskList li.done p{
 	background-color:lightgreen;
 	text-decoration:line-through;
 }
+
 #taskList img.deleteTask{
 	float:right;
 	background-color:#d9645977;
-}
-#taskList img.deleteTask:hover{
-	background-color:#d96459ff;
-}
-section, h1{
-	margin:0px;
-}
-#taskList img{
 	width:20px;
 	padding:15px;
 	border-radius:25px;
 }
-#taskList img.checked, #taskList img.unchecked{
-	float:left;
-}
-#taskList img.unchecked:hover{
-	background-color:#f2e394;
-}
-#taskList img.checked:hover{
-	background-color:#f2e394;
+#taskList img.deleteTask:hover{
+	background-color:#d96459ff;
 }
