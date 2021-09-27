@@ -23,6 +23,7 @@
 	//ADD A TASK ON BTN CLICK OR ENTER KEY
 	let addTaskBtn = document.getElementById('addTask');
 	let addTaskInput = document.getElementById('newTaskName');
+	
 	addTaskBtn.addEventListener('click', addTaskToList)
 	addTaskInput.addEventListener('keypress', function(){
 		if(event.keyCode === 13){
@@ -31,9 +32,11 @@
 		}
 	});
 	
+	/** Retrieves taask desription from input field and adds it to list of tasks to do
+	  */
 	function addTaskToList(){
-		let taskName = document.getElementById('newTaskName');
-		if (taskName.value.length == 0){
+		
+		if (addTaskInput.value.length == 0){
 			return;
 		}
 		//create li
@@ -43,7 +46,7 @@
 		//create p
 		let nodeP = document.createElement('P');
 		nodeP.addEventListener('click', updateTask);
-		nodeP.innerText = taskName.value;
+		nodeP.innerText = addTaskInput.value;
 		//create image
 		let nodeIMG = document.createElement('IMG');
 		nodeIMG.src = 'delete.png';
@@ -55,7 +58,7 @@
 		nodeLI.appendChild(nodeIMG);
 		document.getElementById('taskList').appendChild(nodeLI);
 		//empty field for task name
-		taskName.value='';
+		addTaskInput.value='';
 	}
 	
 
